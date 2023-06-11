@@ -1,0 +1,9 @@
+/.idea/
+/venv/
+/__pycache__/
+/static/
+/media/
+/node_modules/
+/models/__init__.py
+
+*.secret
