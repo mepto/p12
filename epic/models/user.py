@@ -53,12 +53,21 @@ class UserManagement(models.Model):
     """Store Management users."""
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.get_full_name().strip() or self.user.username
+
 
 class UserSupport(models.Model):
     """Store Support users."""
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.get_full_name().strip() or self.user.username
+
 
 class UserSales(models.Model):
     """Store Sales users."""
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.get_full_name().strip() or self.user.username

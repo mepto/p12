@@ -6,6 +6,7 @@ from epic.classes import CapitalizeField, UppercaseField
 class Client(models.Model):
     """Store client information."""
 
+    user = models.ManyToManyField('UserSales')
     company = CapitalizeField(max_length=255, null=False)
     first_name = CapitalizeField(max_length=25, blank=True)
     last_name = UppercaseField(max_length=25, blank=True)
@@ -15,5 +16,11 @@ class Client(models.Model):
     address = models.TextField(null=False)
     is_prospect = models.BooleanField(default=True)
     primary_contact = models.ForeignKey('User', null=False, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_created=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['company']
+
+    def __str__(self):
+        return self.company
