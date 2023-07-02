@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+epic_header = 'Epic Events administration'
+admin.site.site_header = epic_header
+admin.site.index_title = epic_header
+admin.site.site_title = epic_header
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
