@@ -9,7 +9,7 @@ from epic.models.user import User, UserManagement, UserSales, UserSupport
 
 
 class UserAdmin(admin.ModelAdmin):
-    """"""
+    """Set admin for base user."""
     fieldsets = [
         ('User profile', {'fields': ['email', 'last_name', 'first_name']}),
     ]

@@ -68,14 +68,14 @@ the one you provided during the installation.
 When the "postgres=#" prompt appears, create a new user with the following 
 command:
 
-`CREATE USER softdesk_user WITH PASSWORD '<yourpassword>';`
+`CREATE USER epic_user WITH PASSWORD '<yourpassword>';`
 
 Then create a database:
 
-`CREATE DATABASE softdesk_db;`
+`CREATE DATABASE epic_db;`
 
 Ensure user is owner of the database:
-`ALTER DATABASE softdesk_db OWNER TO softdesk_user;`
+`ALTER DATABASE epic_db OWNER TO epic_user;`
 
 ### Migrations
 
