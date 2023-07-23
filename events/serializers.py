@@ -11,10 +11,6 @@ from rest_framework.fields import DateTimeField
 
 from events.models import Event
 
-# from rest_framework.exceptions import ValidationError
-# from rest_framework.fields import ChoiceField, DateTimeField
-# from rest_framework.relations import PrimaryKeyRelatedField
-
 
 class EventSerializer(serializers.ModelSerializer):
     """Serialize Event model."""
@@ -25,5 +21,6 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class."""
         model = Event
-        fields = ['id', 'user', 'status_contract', 'contract', 'attendees', 'event_date', 'notes', 'date_created',
+        fields = ['id', 'users', 'status_event', 'contract', 'attendees', 'event_date', 'notes',
+                  'date_created',
                   'date_modified']

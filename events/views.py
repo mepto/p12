@@ -1,3 +1,12 @@
-# from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from events.models import Event
+from events.serializers import EventSerializer
+
+
+class EventViewSet(ModelViewSet):
+    """View for clients."""
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [IsAuthenticated]
