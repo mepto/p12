@@ -39,4 +39,5 @@ repos:
                     [
                         "-rn", # Only display messages
                         "-sn", # Don't display the score
+                        "--rcfile=.pylintrc"
                     ]

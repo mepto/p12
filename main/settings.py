@@ -52,11 +52,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     # app
     'main',
     'epic',
-    # 'epic.apps.EpicConfig',
+    'users',
+    'clients',
+    'contracts',
+    'events',
 
     # vendors
     'rest_framework',
@@ -74,7 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = 'epic.User'
+AUTH_USER_MODEL = 'users.User'
 
 ROOT_URLCONF = 'main.urls'
 LOGIN_REDIRECT_URL = '/'
@@ -95,6 +97,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
+}
+
+REST_USE_JWT = True
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 TEMPLATES = [

@@ -7,4 +7,7 @@ django-settings-module=main.settings
 ignore=softdesk.migrations
 
 [MESSAGES CONTROL]
-disable=C0114
+disable=C0114,E0307,R0903,C0103,W0221
+
+[FORMAT]
+max-line-length=120

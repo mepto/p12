@@ -37,12 +37,13 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
+        """Default human-readable return for base user object."""
         return self.get_full_name().strip() or self.username
 
     class Meta:
+        """Meta class."""
         verbose_name = "User (base)"
         verbose_name_plural = "Users (base)"
-        app_label = 'epic'
         swappable = "AUTH_USER_MODEL"
         constraints = [
             models.UniqueConstraint(Lower('email'), name='unique_email')
@@ -54,7 +55,13 @@ class UserManagement(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Default human-readable return for user management object."""
         return self.user.get_full_name().strip() or self.user.username
+
+    class Meta:
+        """Meta class."""
+        verbose_name = "User (management)"
+        verbose_name_plural = "Users (management)"
 
 
 class UserSupport(models.Model):
@@ -62,7 +69,13 @@ class UserSupport(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Default human-readable return for user support object."""
         return self.user.get_full_name().strip() or self.user.username
+
+    class Meta:
+        """Meta class."""
+        verbose_name = "User (support)"
+        verbose_name_plural = "Users (support)"
 
 
 class UserSales(models.Model):
@@ -70,4 +83,10 @@ class UserSales(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Default human-readable return for user sales object."""
         return self.user.get_full_name().strip() or self.user.username
+
+    class Meta:
+        """Meta class."""
+        verbose_name = "User (sales)"
+        verbose_name_plural = "Users (sales)"

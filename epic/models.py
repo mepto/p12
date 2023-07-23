@@ -9,6 +9,7 @@ class StatusContract(models.Model):
     name = CapitalizeField(max_length=25, blank=True)
 
     def __str__(self):
+        """Default human-readable return for contract status object."""
         return self.name
 
 
@@ -18,4 +19,5 @@ class StatusEvent(models.Model):
     name = CapitalizeField(max_length=25, blank=True)
 
     def __str__(self):
+        """Default human-readable return for event status object."""
         return self.name
