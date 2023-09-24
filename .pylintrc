@@ -4,7 +4,7 @@ max-parents=15
 [MAIN]
 load-plugins=pylint_django
 django-settings-module=main.settings
-ignore=softdesk.migrations
+ignore=epic.migrations, rules.py
 
 [MESSAGES CONTROL]
 disable=C0114,E0307,R0903,C0103,W0221,R0801
