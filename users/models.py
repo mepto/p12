@@ -13,6 +13,7 @@ class EpicUserManager(UserManager):
         email = self.normalize_email(email)
         user = User(email=email, **extra_fields)
         user.set_password(password)
+        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -26,25 +27,25 @@ class EpicUserManager(UserManager):
 
 class User(AbstractUser):
     """Extend django auth user class."""
-    username = None
-    email = LowercaseEmailField(max_length=100, unique=True)
+    username = models.CharField(max_length=150, unique=True)
+    email = LowercaseEmailField(max_length=320, unique=True)
     last_name = UppercaseField(max_length=150, blank=True)
     first_name = CapitalizeField(max_length=150, blank=True)
     date_modified = models.DateTimeField(auto_now=True)
     objects = EpicUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    # USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
         """Default human-readable return for base user object."""
-        return self.get_full_name().strip() or self.username
+        return self.get_full_name().strip() or self.email
 
     class Meta:
         """Meta class."""
-        verbose_name = "User (base)"
-        verbose_name_plural = "Users (base)"
-        swappable = "AUTH_USER_MODEL"
+        verbose_name = 'User (base)'
+        verbose_name_plural = 'Users (base)'
+        swappable = 'AUTH_USER_MODEL'
         constraints = [
             models.UniqueConstraint(Lower('email'), name='unique_email')
         ]
@@ -56,12 +57,12 @@ class UserManagement(models.Model):
 
     def __str__(self):
         """Default human-readable return for user management object."""
-        return self.user.get_full_name().strip() or self.user.username
+        return self.user.get_full_name().strip() or self.user.email
 
     class Meta:
         """Meta class."""
-        verbose_name = "User (management)"
-        verbose_name_plural = "Users (management)"
+        verbose_name = 'User (management)'
+        verbose_name_plural = 'Users (management)'
 
 
 class UserSupport(models.Model):
@@ -70,12 +71,12 @@ class UserSupport(models.Model):
 
     def __str__(self):
         """Default human-readable return for user support object."""
-        return self.user.get_full_name().strip() or self.user.username
+        return self.user.get_full_name().strip() or self.user.email
 
     class Meta:
         """Meta class."""
-        verbose_name = "User (support)"
-        verbose_name_plural = "Users (support)"
+        verbose_name = 'User (support)'
+        verbose_name_plural = 'Users (support)'
 
 
 class UserSales(models.Model):
@@ -84,9 +85,9 @@ class UserSales(models.Model):
 
     def __str__(self):
         """Default human-readable return for user sales object."""
-        return self.user.get_full_name().strip() or self.user.username
+        return self.user.get_full_name().strip() or self.user.email
 
     class Meta:
         """Meta class."""
-        verbose_name = "User (sales)"
-        verbose_name_plural = "Users (sales)"
+        verbose_name = 'User (sales)'
+        verbose_name_plural = 'Users (sales)'
