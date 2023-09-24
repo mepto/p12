@@ -40,7 +40,8 @@ The .epic.secret file must contain a SECRET_KEY for Django and a DB_PWD for the 
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
-
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 # Application definition
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rules.apps.AutodiscoverRulesConfig',
 
     # app
     'main',
@@ -63,7 +65,6 @@ INSTALLED_APPS = [
     # vendors
     'rest_framework',
     'rest_framework_simplejwt',
-    # 'rules.apps.AutodiscoverRulesConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,10 +81,10 @@ AUTH_USER_MODEL = 'users.User'
 
 ROOT_URLCONF = 'main.urls'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/admin/login/'
 
 AUTHENTICATION_BACKENDS = (
-    # 'rules.permissions.ObjectPermissionBackend',
+    'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 )
