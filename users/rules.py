@@ -1,30 +1,41 @@
+import logging
+
 from rules.permissions import add_perm
 from rules.predicates import is_authenticated, predicate
 
 from users.models import UserManagement, UserSales, UserSupport
 
+logger = logging.getLogger('main')
+
 
 @predicate
 def is_management(user, obj):
     """Check if user is in management."""
+    logger.info('[users] Can user %s access object %s as management: %s', user, obj,
+                UserManagement.objects.filter(user_id=user.id).exists())
     return UserManagement.objects.filter(user_id=user.id).exists()
 
 
 @predicate
 def is_sales(user, obj):
     """Check if user is in sales."""
+    logger.info('[users] Can user %s access object %s as sales: %s', user, obj,
+                UserSales.objects.filter(user_id=user.id).exists())
     return UserSales.objects.filter(user_id=user.id).exists()
 
 
 @predicate
 def is_support(user, obj):
     """Check if user is in support."""
+    logger.info('[users] Can user %s access object %s as support: %s', user, obj,
+                UserSupport.objects.filter(user_id=user.id).exists())
     return UserSupport.objects.filter(user_id=user.id).exists()
 
 
 @predicate
 def themselves(user, obj):
     """Check if user is trying to change themselves."""
+    logger.info('Is user %s trying to change (%s) themselves: %s', user, obj, user == obj)
     return user == obj
 
 
