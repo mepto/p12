@@ -182,3 +182,66 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'formatters': {
+        'semi_verbose': {
+            'format': '[%(levelname)s] %(funcName)s(): %(message)s'
+        },
+        'semi_verbose_date': {
+            'format': '%(asctime)s [%(levelname)s] %(funcName)s(): %(message)s'
+        },
+        'verbose': {
+            'format': '%(asctime)s [%(levelname)s] %(module)s %(name)s (line %(lineno)d) %(funcName)s(): %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'backend_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': f'{BASE_DIR}/log/backend.log',
+            'formatter': 'semi_verbose_date'
+        },
+        'django_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': f'{BASE_DIR}/log/django.log',
+            'formatter': 'verbose'
+        },
+        'main_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': f'{BASE_DIR}/log/main.log',
+            'formatter': 'semi_verbose_date'
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['backend_log', 'console'],
+            'level': 'DEBUG',
+        },
+        'django': {
+            'handlers': ['django_log'],
+            'level': 'INFO',
+        },
+        'main': {
+            'handlers': ['main_log'],
+            'level': 'INFO',
+        },
+    }
+}
