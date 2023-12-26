@@ -1,11 +1,3 @@
-# recherche sur le nom du client, l'email du client, date événement
-# équipe de vente peut
-# - créer des événements pour un contrat
-# - afficher en RO tous les événements
-# équipe de support peut
-# - afficher et mettre à jour les événements qui leur sont attribués
-# jusqu'à la fin de l'événement
-# - afficher en RO tous les events
 from rest_framework import serializers
 from rest_framework.fields import DateTimeField
 

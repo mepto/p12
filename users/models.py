@@ -34,7 +34,6 @@ class User(AbstractUser):
     date_modified = models.DateTimeField(auto_now=True)
     objects = EpicUserManager()
 
-    # USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
