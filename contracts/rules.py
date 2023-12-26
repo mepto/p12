@@ -28,11 +28,8 @@ def is_support(user, obj):
 @predicate
 def is_listed_sales(user, obj):
     """Check if user is in sales users for this object."""
-    if obj:
-        logger.info('[contracts] Is user %s listed as sales staff for contract %s : %s', user, obj,
-                    user in obj.users.all())
-        if user in obj.users.all():
-            return True
+    if obj and user.id in obj.users.all().values_list('user', flat=True):
+        return True
     return False
 
 

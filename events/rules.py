@@ -38,10 +38,9 @@ def date_is_passed(user, obj):
 @predicate
 def is_listed_support(user, obj):
     """Check if user is in support users for the object."""
-    if obj:
-        if user in obj.users.all():
-            return True
-    return True
+    if obj and user.id in obj.users.all().values_list('user', flat=True):
+        return True
+    return False
 
 
 add_perm('events', is_authenticated)
