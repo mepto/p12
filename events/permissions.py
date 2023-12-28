@@ -1,4 +1,4 @@
-from dateutil.utils import today
+from datetime import date
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 from users.models import UserSales, UserSupport
@@ -46,6 +46,6 @@ class EventPermission(BasePermission):
         if request.method == 'PATCH' \
                 and UserSupport.objects.filter(user_id=current_user).exists() \
                 and request.user.id in obj.users.filter(user_id=current_user.id).values_list('user_id', flat=True) \
-                and obj.event_date <= today():
+                and obj.event_date >= date.today():
             return True
         return False
